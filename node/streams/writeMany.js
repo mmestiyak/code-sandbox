@@ -45,31 +45,31 @@ const fsDefault = require('node:fs');
 
 
 // ===============================================
-// Method 3: Synchronous Writing with `fs.writeSync`
+// Method 3: Callback approach with `fs.writeSync`
 // ===============================================
 // Time: ~11.224 seconds
-// - Opens file once and performs synchronous writes, reducing overhead compared to Method 1.
+// - callback approach with synchronous writes, reducing overhead of promise creation compared to Method 2.
 // ===============================================
 
-(() => {
-    try {
-        fsDefault.open('./million.txt', 'w', (err, fd) => {
-            if (err) return console.log(err);
+// (() => {
+//     try {
+//         fsDefault.open('./million.txt', 'w', (err, fd) => {
+//             if (err) return console.log(err);
 
-            console.time('writeMany');
-            for (let i = 0; i <= 1000000; i++) {
-                fsDefault.writeSync(fd, 'I am line number ' + i + '\n');
-            }
-            fsDefault.close(fd, (err) => {
-                if (err) return console.log(err);
-                console.log('File closed successfully.');
-            });
-            console.timeEnd('writeMany');
-        });
-    } catch (e) {
-        console.log(e);
-    }
-})();
+//             console.time('writeMany');
+//             for (let i = 0; i <= 1000000; i++) {
+//                 fsDefault.writeSync(fd,  i + '\n');
+//             }
+//             fsDefault.close(fd, (err) => {
+//                 if (err) return console.log(err);
+//                 console.log('File closed successfully.');
+//             });
+//             console.timeEnd('writeMany');
+//         });
+//     } catch (e) {
+//         console.log(e);
+//     }
+// })();
 
 
 // ===============================================
