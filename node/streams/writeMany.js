@@ -1,5 +1,6 @@
 const fs = require('node:fs/promises');
 const fsDefault = require('node:fs');
+const { log } = require('node:console');
 
 // ===============================================
 // Method 1: `fs.appendFile` for Direct Line Writing
@@ -119,3 +120,15 @@ const fsDefault = require('node:fs');
 //         console.log(e);
 //     }
 // })();
+
+
+
+(async() => {
+    console.time('program')
+    const fileHandle = await fs.open('./million.txt', 'w')
+    const stream = fileHandle.createWriteStream()
+    console.log(stream.writableHighWaterMark)
+    stream.write("a")
+    console.log(stream.writableLength)
+    console.timeEnd('program')
+})()
